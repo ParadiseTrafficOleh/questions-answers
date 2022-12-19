@@ -97,7 +97,7 @@ const data = {
                     correct: false
                 },
                 {
-                    text: 'Billie Eilish',
+                    text: 'Greece',
                     correct: false
                 }
             ]
