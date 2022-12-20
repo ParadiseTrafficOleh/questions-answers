@@ -3,7 +3,10 @@ import data from '../data.js';
 const questions = data.questions
 const questionsElement = document.querySelector('.questions')
 
-const answers = []
+const answersData = {
+    answers: [],
+    formData: {}
+}
 
 // Generating elements
 // questions.forEach((element, index) => {
@@ -24,7 +27,29 @@ const answers = []
 questions.forEach((element, index) => {
     let questionsContainer = document.createElement('div')
     questionsContainer.classList.add('questions__cointainer')
-    questionsContainer.innerHTML = `
+    if(element.form) {
+        questionsContainer.innerHTML = `
+        <form action="#" class="questions__form">
+            <div class="questions__form_group">
+                <label for="first-name" class="questions__form_label">First Name</label>
+                <input id="first-name" type="text" class="questions__form_input">
+            </div>
+            <div class="questions__form_group">
+                <label for="first-name" class="questions__form_label">Last Name</label>
+                <input id="last-name" type="text" class="questions__form_input">
+            </div>
+            <div class="questions__form_group">
+                <button id="submit" type="submit" class="questions__form_submit">Submit</button>
+            </div>
+        </form>
+        <div class="questions__navigation_container">
+            <p class="questions__prev">Prev</p>
+            <p class="questions__number">${index + 1} / ${questions.length}</p>
+            <p class="questions__next questions___inactive_nav">Next</p>
+        </div>
+        `
+    } else {
+        questionsContainer.innerHTML = `
     <div class="questions__block">
         <h2 class="questions__question">${element.question}</h2>
         <div class="questions__answers_container">
@@ -39,13 +64,15 @@ questions.forEach((element, index) => {
             <p class="questions__next questions___inactive_nav">Next</p>
     </div>
     `
+    }
+    
     questionsElement.appendChild(questionsContainer)
 })
 // Generating elements end
 
 
 //  Slider
-let slideIndex = 1;
+let slideIndex = 10;
 
 function plusQuestion (n) {
     showQuestions(slideIndex += n);
@@ -89,13 +116,33 @@ document.querySelectorAll('.questions__answer').forEach(item => {
             corretclyAnswerd
         }
 
-        answers.push(data)
+        answersData.answers.push(data)
         setTimeout(() => {
             plusQuestion(1)
         }, 1000)
     })
 })
 // Answer end
+
+
+// Form submit
+const firstName = document.getElementById('first-name')
+const lastName = document.getElementById('last-name')
+
+document.getElementById('submit').addEventListener('click', e => {
+    e.preventDefault()
+
+    if(firstName.value && lastName.value) {
+        answersData.formData.firstName = firstName.value
+        answersData.formData.lastName = lastName.value
+
+        console.log('answersData:', answersData)
+        
+    } else {
+        alert('Please fill in all fields')
+    }
+})
+// Form submit end
 
 
 

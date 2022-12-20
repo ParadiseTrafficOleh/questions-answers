@@ -169,6 +169,9 @@ const data = {
                     correct: false
                 }
             ]
+        },
+        {
+            form: true
         }
     ]
 }
