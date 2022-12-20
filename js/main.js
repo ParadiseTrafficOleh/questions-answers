@@ -72,7 +72,7 @@ questions.forEach((element, index) => {
 
 
 //  Slider
-let slideIndex = 10;
+let slideIndex = 1;
 
 function plusQuestion (n) {
     showQuestions(slideIndex += n);
@@ -86,7 +86,7 @@ const showQuestions = (n) => {
     for (i = 0; i < questions.length; i++) {
         questions[i].style.display = "none"
     }
-    questions[slideIndex-1].style.display = "block"
+    questions[slideIndex-1].style.display = "flex"
 }
 
 showQuestions(slideIndex);
@@ -137,7 +137,7 @@ document.getElementById('submit').addEventListener('click', e => {
         answersData.formData.lastName = lastName.value
 
         console.log('answersData:', answersData)
-        
+        alert(`${firstName.value} ${lastName.value} your data was submitted`)
     } else {
         alert('Please fill in all fields')
     }
